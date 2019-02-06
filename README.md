@@ -89,3 +89,10 @@ The fee structure doesn't follow particular algorithm and it is possible that sa
 £19000: £760
 £20000: £800
 ```
+
+# Development
+To add new support for new interpolation methods, implement the FeeCalculatorInterface.
+
+# Testing
+1. Run `composer install` to install the dependencies.
+2. Run `./vendor/phpunit/phpunit/phpunit tests` to run the tests using PHPUnit package.
