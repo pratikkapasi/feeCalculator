@@ -11,6 +11,10 @@ namespace Lendable\Interview\Interpolation\Service\Fee;
  */
 class Structure
 {
+    // This can also be fetched from the environment files
+    const MIN_AMOUNT_ALLOWED = 1000;
+    const MAX_AMOUNT_ALLOWED = 20000;
+
     /**
      * The Fee structure for different terms is defined here.
      * It maps the number of months in the term with the fee structure defined for the term.
@@ -71,7 +75,7 @@ class Structure
      *
      * @return bool
      */
-    public function isValidTerm(int $term): bool
+    public static function isValidTerm(int $term): bool
     {
         return (array_key_exists($term, self::$structure) === true);
     }
@@ -83,7 +87,7 @@ class Structure
      *
      * @return array
      */
-    public function getStructure(int $term): array
+    public static function getStructure(int $term): array
     {
         $termStructure = self::$structure[$term] ?? [];
 
