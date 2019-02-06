@@ -107,16 +107,25 @@ class FeeCalculator implements FeeCalculatorInterface
         // Linear Interpolation -
         //
         //            (x - x0) * (y1 - y0)
-        //  Y = y0 +  ____________________
+        //  Y = y0 +  ____________________      [Y = Base + value]
         //
         //                  (x1 - x0)
         //
 
-        $base = $dataSet[$min];
-
+        $base  = $dataSet[$min];
         $value = (($x - $min) * ($dataSet[$max] - $dataSet[$min])) / ($max - $min);
 
-        return ($base + $value);
+        $fee   = $base + $value;
+        $total = $fee + $x;
+
+        // Round up total to the nearest 5
+        $total = ceil($total/5) * 5;
+        echo $total;
+
+        // Adjust fee so that amount + fee is an exact multiple of 5
+        $fee = round($total - $x,2);
+
+        return $fee;
     }
 
 }
